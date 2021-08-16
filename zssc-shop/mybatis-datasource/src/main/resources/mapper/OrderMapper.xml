@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.mapper.OrderMapper">
+
+
+    <insert id="addOrder">
+
+        insert into
+          t_order_${tableIndex}
+          (
+                uid,
+                create_time,
+                address,
+                phone,
+                username,
+                total_price,
+                pay_type,
+                status
+          )
+          values
+          (
+              #{order.uid},
+              now(),
+              #{order.address},
+              #{order.phone},
+              #{order.username},
+              #{order.totalPrice},
+              #{order.payType},
+              #{order.status}
+          )
+
+    </insert>
+
+
+    <insert id="batchDelOrderDetail">
+
+        insert into
+          t_order_detail_${tableIndex}
+          (
+                oid,
+                gid,
+                count,
+                subtotal,
+                gname,
+                gdesc,
+                gpng,
+                gprice
+          )
+          values
+
+      <foreach collection="odList" item="od" separator=",">
+          (
+            #{od.oid},
+            #{od.gid},
+            #{od.count},
+            #{od.subtotal},
+            #{od.gname},
+            #{od.gdesc},
+            #{od.gpng},
+            #{od.gprice}
+          )
+      </foreach>
+
+
+    </insert>
+
+</mapper>

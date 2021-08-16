@@ -1,0 +1,12 @@
+com\qf\entity\Goods.class
+com\qf\entity\User.class
+com\qf\domain\CarGoods.class
+com\qf\entity\OrderDetail.class
+com\qf\entity\Order.class
+com\qf\entity\SeckillGoods.class
+com\qf\entity\GoodsPic.class
+com\qf\entity\Car.class
+com\qf\entity\ResultEntity.class
+com\qf\entity\Email.class
+com\qf\entity\ShopException.class
+com\qf\entity\Address.class

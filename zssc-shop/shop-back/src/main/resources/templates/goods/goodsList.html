@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <base href="http://localhost/shop-resources/back/" />
+
+
+    <link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> 商品列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l">
+                <a href="javascript:;" id="batchDelUesrBut" class="btn btn-danger radius">
+                        <i class="Hui-iconfont">&#xe6e2;</i> 批量删除
+                </a>
+
+                <a href="javascript:;" onclick="admin_add('添加商品','http://localhost/shop-back/toAddGoodsPage','800','500')"
+                    class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加商品
+                </a>
+        </span>
+    </div>
+    <table class="table table-border table-bordered table-bg">
+        <thead>
+        <tr class="text-c">
+            <th width="25"><input type="checkbox" name="" ></th>
+            <th width="40">ID</th>
+            <th width="150">商品名称</th>
+            <th width="90">商品类型</th>
+            <th width="150">商品的图片</th>
+            <th width="150">商品价格</th>
+            <th width="100">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr class="text-c" th:each="goods:${page.records}">
+                <td><input class="user-id" type="checkbox" th:value="${goods.id}" name=""></td>
+                <td th:text="${goods.id}"/>
+                <td th:text="${goods.gname}"/>
+                <td th:text="${goods.gtype}"/>
+                <td>
+                    <img style="width: 70px;" th:each="goodsPic:${goods.goodsPicList}" th:src="${goodsPic.png}">
+                </td>
+                <td th:text="${goods.gprice}"/>
+                <td class="td-manage">
+                    <a title="编辑" href="javascript:;"
+                       th:onclick="|admin_edit('用户编辑','http://localhost/shop-back/userController/getUserById/${goods.id}','1','600','400')|"
+                       class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>
+                    </a>
+
+                    <a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none">
+                            <i class="Hui-iconfont">&#xe6e2;</i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div th:include="/common/page::pageDiv"/>
+
+</div>
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
+<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="js/H-ui.js"></script>
+<script type="text/javascript" src="js/H-ui.admin.js"></script>
+<script type="text/javascript" src="js/formUtils.js"></script>
+
+<script type="text/javascript">
+
+    /*管理员-增加*/
+    function admin_add(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+
+    /*管理员-编辑*/
+    function admin_edit(title,url,id,w,h){
+        layer_show(title,url,w,h);
+    }
+
+</script>
+</body>
+</html>

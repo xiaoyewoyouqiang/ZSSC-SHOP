@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.mapper.CarMapper">
+
+
+    <resultMap id="baseResultMap" type="carGoods">
+
+        <result column="count" property="count"/>
+        <result column="gname" property="gname"/>
+        <result column="gprice" property="gprice"/>
+        <result column="gid" property="id"/>
+        <result column="gdesc" property="gdesc"/>
+
+        <!-- 对多-->
+        <collection property="goodsPicList" ofType="goodsPic">
+            <id column="gpId" property="id"/>
+            <result property="png" column="png"/>
+        </collection>
+
+    </resultMap>
+    
+    <select id="getMySQLUserCarList" resultMap="baseResultMap">
+                     SELECT
+                c.*, g.*,gp.*,gp.id as gpId
+            FROM
+                t_car c
+            LEFT JOIN t_goods g ON (c.gid = g.id)
+            left join t_goods_pic gp on (g.id = gp.gid)
+            WHERE
+	            c.uid = #{id}
+    </select>
+
+
+    <select id="getCarGoodsById" resultMap="baseResultMap">
+            SELECT
+                g.*, gp.*
+            FROM
+                t_goods g
+            LEFT JOIN t_goods_pic gp ON (g.id = gp.gid)
+            WHERE
+                g.id = #{gid}
+    </select>
+
+</mapper>

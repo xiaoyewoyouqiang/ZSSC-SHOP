@@ -1,0 +1,20 @@
+# 在服务中心注册
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7777/eureka/
+
+spring:
+  application: # 在服务中心注册的名字
+    name: shop-back
+  thymeleaf:
+    cache: false
+# 运行端口号
+server:
+  port: 8002
+
+# 日志记录
+logging:
+  level:
+    com.qf: debug
+    com.qf.mapper: debug

@@ -1,0 +1,19 @@
+# 在服务中心注册
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7777/eureka/
+spring:
+  application: # 在服务中心注册的名字
+    name: shop-resources
+server:
+  port: 8003
+fdfs:
+  tracker-list:
+    - 192.168.126.129:22122 # tacker服务的地址
+  connect-timeout: 3000 # 连接超时时间
+  so-timeout: 3000 # 读取文件超时时间
+  thumb-image: # 缩略图
+    height: 200
+    width: 200
+fasthome: http://192.168.126.129:8080/

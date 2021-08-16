@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+
+<div th:fragment="pageDiv">
+
+    <link href="lib/layui/css/layui.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="lib/layui/layui.js"></script>
+
+        <div id="pageDemo"></div>
+
+        <script th:inline="javascript">
+            var total =[[${page.total}]];
+            var current =[[${page.current}]];
+            var size =[[${page.size}]];
+            var url =[[${url}]];
+        </script>
+
+        <script>
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage
+                    ,layer = layui.layer;
+                //完整功能
+                laypage.render({
+                    elem: 'pageDemo' // 指向存放分页的容器
+                    ,count: total // 数据总数。一般通过服务端得到
+                    ,curr:current // 当前页
+                    ,limit:size // 每页显示的条数
+                    ,layout: ['prev', 'page', 'next', 'limit','count']
+                    ,limits:[5,10,20,30]
+                    ,jump: function(obj,first){
+                        if(!first){
+                            location.href = url+"?current="+obj.curr+"&size="+obj.limit;
+                        }
+                    }
+                });
+            });
+        </script>
+
+</div>
+</body>
+
+
+
+</html>

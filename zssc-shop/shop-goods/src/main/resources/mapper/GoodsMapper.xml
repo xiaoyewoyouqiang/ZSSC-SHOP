@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.mapper.GoodsMapper">
+
+
+    <insert id="addGoods" parameterType="goods">
+        insert into
+        t_goods(
+        gname,
+        gdesc,
+        gtype,
+        gprice
+        )
+        values
+        (
+        #{gname},
+        #{gdesc},
+        #{gtype},
+        #{gprice}
+        );
+
+        insert into
+        t_goods_pic (
+        gid,
+        png
+        )
+        values
+        <foreach collection="goodsPicList" separator="," item="goodsPic">
+            (
+            LAST_INSERT_ID(),
+            #{goodsPic.png}
+            )
+
+        </foreach>
+    </insert>
+
+
+    <select id="getGoodsPage" resultType="goods">
+            SELECT
+                g.*, gp.*
+            FROM
+                t_goods g
+            LEFT JOIN t_goods_pic gp ON (g.id = gp.gid)
+    </select>
+
+</mapper>

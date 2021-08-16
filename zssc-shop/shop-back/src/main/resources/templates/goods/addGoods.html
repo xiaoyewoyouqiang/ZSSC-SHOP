@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <base href="http://localhost/shop-resources/back/" />
+
+
+    <link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+    <link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="pd-20">
+    <form action="abc" method="post" class="form form-horizontal" id="form-admin-add">
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span>商品名称：</label>
+            <div class="formControls col-5">
+                <input type="hidden" name="tempPng" id="tempPng">
+                <input type="text" class="input-text" value="" placeholder="" id="gname"  name="gname" datatype="*" nullmsg="商品名不能为空">
+            </div>
+            <div class="col-4"> </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span>商品价格：</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" value="" placeholder="" id="gprice" name="gprice"  datatype="*" nullmsg="价格不能为空">
+            </div>
+            <div class="col-4"> </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3">商品类型:</label>
+            <div class="formControls col-5"> <span class="select-box" style="width:150px;">
+				<select class="select" name="gtype" size="1">
+					<option value="1">手机</option>
+					<option value="2">电脑</option>
+					<option value="3">冰箱</option>
+					<option value="4">口红</option>
+				</select>
+				</span> </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3">商品图片：</label>
+            <div class="formControls col-5">
+
+                <div id="uploader-demo">
+                    <!--用来存放item-->
+                    <div id="fileList" class="uploader-list"></div>
+                    <div id="filePicker">选择图片</div>
+                </div>
+
+            </div>
+            <div class="col-4"> </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3">商品描述：</label>
+            <div class="formControls col-5">
+                <textarea name="gdesc" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="textarealength(this,100)"></textarea>
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+            </div>
+            <div class="col-4"> </div>
+        </div>
+
+
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="lib/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
+<script type="text/javascript" src="js/H-ui.js"></script>
+<script type="text/javascript" src="js/H-ui.admin.js"></script>
+<script type="text/javascript" src="js/formUtils.js"></script>
+<script type="text/javascript" src="lib/webuploader/0.1.5/webuploader.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+
+        // 初始化Web Uploader
+        var uploader = WebUploader.create({
+            auto: true, // 是否自动上传
+            server: 'http://localhost/shop-resources/ruController/uploadPng', // 上传到服务器的地址
+            pick: '#filePicker', // 把div熏染成按钮的效果
+            accept: { // 客户端对选择文件的一个过滤
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+
+
+        // 当有文件添加进来的时候
+        uploader.on( 'fileQueued', function( file ) {
+            var $li = $(
+                '<div id="' + file.id + '" class="file-item thumbnail">' +
+                '<img>' +
+                '<div class="info">' + file.name + '</div>' +
+                '</div>'
+                ),
+                $img = $li.find('img');
+
+
+            // $list为容器jQuery实例
+            $("#fileList").append( $li );
+
+            // 创建缩略图
+            // 如果为非图片文件，可以不用调用此方法。
+            // thumbnailWidth x thumbnailHeight 为 100 x 100
+            uploader.makeThumb( file, function( error, src ) {
+                if ( error ) {
+                    $img.replaceWith('<span>不能预览</span>');
+                    return;
+                }
+
+                $img.attr( 'src', src );
+            }, 100, 100);
+        });
+
+
+        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+        uploader.on( 'uploadSuccess', function(file,response) {
+           var filePath =  response._raw;
+           // 1.先后去图片的地址
+            var tempPng = $("#tempPng").val();
+
+            if(tempPng){
+                // tempPng已经保存了在其他的图片地址，新图片的地址需要拼接到后面
+                filePath  = tempPng+"|"+filePath;
+            }
+            $("#tempPng").val(filePath);
+
+            $( '#'+file.id ).addClass('upload-state-done');
+        });
+
+// 文件上传失败，显示上传出错。
+        uploader.on( 'uploadError', function( file ) {
+            var $li = $( '#'+file.id ),
+                $error = $li.find('div.error');
+
+            // 避免重复创建
+            if ( !$error.length ) {
+                $error = $('<div class="error"></div>').appendTo( $li );
+            }
+
+            $error.text('上传失败');
+        });
+
+
+
+        $("#form-admin-add").Validform({
+            tiptype:2,
+            callback:function(form){ // 表单全部验证通过后会调用这个函数
+                submitForm(form,"http://localhost/shop-back/goodsController/addGoods");
+                return false; // 这里返回false表示表单不会提交。
+            }
+        });
+    });
+</script>
+</body>
+</html>

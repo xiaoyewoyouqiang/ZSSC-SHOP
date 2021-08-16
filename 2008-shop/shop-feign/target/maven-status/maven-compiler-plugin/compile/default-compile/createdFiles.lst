@@ -1,0 +1,6 @@
+com\qf\feign\api\IGoodsService.class
+com\qf\feign\api\IAddressService.class
+com\qf\feign\api\IOrderService.class
+com\qf\feign\api\ICarService.class
+com\qf\feign\api\IUserService.class
+com\qf\feign\impl\UserServiceImpl.class

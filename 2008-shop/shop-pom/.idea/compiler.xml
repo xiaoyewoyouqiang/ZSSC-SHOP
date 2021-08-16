@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="shop-config" />
+        <module name="shop-sso" />
+        <module name="rabbitmq-demo" />
+        <module name="shop-entity" />
+        <module name="shop-home" />
+        <module name="shop-car" />
+        <module name="shop-feign" />
+        <module name="shop-seckill" />
+        <module name="shop-pay" />
+        <module name="shop-resources" />
+        <module name="shop-eureka" />
+        <module name="shop-search" />
+        <module name="shop-back" />
+        <module name="mybatis-datasource" />
+        <module name="shop-goods" />
+        <module name="shop-zuul" />
+        <module name="shop-order" />
+        <module name="shop-address" />
+        <module name="shop-email" />
+        <module name="shop-user" />
+        <module name="shop-common" />
+        <module name="shop-item" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="mybatis-datasource" target="1.8" />
+      <module name="rabbitmq-demo" target="1.8" />
+      <module name="shop-address" target="1.8" />
+      <module name="shop-back" target="1.8" />
+      <module name="shop-car" target="1.8" />
+      <module name="shop-common" target="1.8" />
+      <module name="shop-config" target="1.8" />
+      <module name="shop-email" target="1.8" />
+      <module name="shop-entity" target="1.8" />
+      <module name="shop-eureka" target="1.8" />
+      <module name="shop-feign" target="1.8" />
+      <module name="shop-goods" target="1.8" />
+      <module name="shop-home" target="1.8" />
+      <module name="shop-item" target="1.8" />
+      <module name="shop-order" target="1.8" />
+      <module name="shop-pay" target="1.8" />
+      <module name="shop-pom" target="1.8" />
+      <module name="shop-resources" target="1.8" />
+      <module name="shop-search" target="1.8" />
+      <module name="shop-seckill" target="1.8" />
+      <module name="shop-sso" target="1.8" />
+      <module name="shop-user" target="1.8" />
+      <module name="shop-zuul" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mybatis-datasource" options="-parameters" />
+      <module name="rabbitmq-demo" options="-parameters" />
+      <module name="shop-address" options="-parameters" />
+      <module name="shop-back" options="-parameters" />
+      <module name="shop-car" options="-parameters" />
+      <module name="shop-common" options="-parameters" />
+      <module name="shop-config" options="-parameters" />
+      <module name="shop-email" options="-parameters" />
+      <module name="shop-entity" options="-parameters" />
+      <module name="shop-eureka" options="-parameters" />
+      <module name="shop-feign" options="-parameters" />
+      <module name="shop-goods" options="-parameters" />
+      <module name="shop-home" options="-parameters" />
+      <module name="shop-item" options="-parameters" />
+      <module name="shop-order" options="-parameters" />
+      <module name="shop-pay" options="-parameters" />
+      <module name="shop-resources" options="-parameters" />
+      <module name="shop-search" options="-parameters" />
+      <module name="shop-seckill" options="-parameters" />
+      <module name="shop-sso" options="-parameters" />
+      <module name="shop-user" options="-parameters" />
+      <module name="shop-zuul" options="-parameters" />
+    </option>
+  </component>
+</project>

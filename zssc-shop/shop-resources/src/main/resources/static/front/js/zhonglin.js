@@ -41,7 +41,7 @@ $(document).ready(function() {
 
 //轮播图
 	var tu=0;
-	var spend=1000;
+	var spend=3000;
 	/*点击  右侧*/
 	$(".bnr-right").click(function(){
 		dsq();
@@ -56,7 +56,7 @@ $(document).ready(function() {
 		$(".banner ul").animate({"left":-tu*1200},spend);
 	});
 	/*定时器 开启*/
-	var time=setInterval(dsq,2000);
+	var time=setInterval(dsq,3000);
 	function dsq(){
 		tu++;
 		if(tu>5){
@@ -68,7 +68,7 @@ $(document).ready(function() {
 	$(".banner").hover(function(){
 		clearInterval(time);	},function(){
 		clearInterval(time);
-		time=setInterval(dsq,2000);
+		time=setInterval(dsq,3000);
 	});
 //轮播图 END
 

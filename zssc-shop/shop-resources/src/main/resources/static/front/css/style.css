@@ -60,7 +60,7 @@ a:focus{outline:none; -moz-outline:none;}		/*解决  去除 a 链接点击后有
 .dianji .btn1{ margin-bottom:13px;}
 .dianji .btn1 button{ font-size:14px; color:#fff;width:62px; height:40px; float:left;}
 .dianji .btn1 .btn1-l{ background-color:#D11415;}
-.dianji .btn1 .btn1-r{ background-color:#fff; color:#AB5100;}
+.dianji .btn1 .btn1-r{ background-color:#fff; color:#D11415;}
 .dianji .btn2{ font-size:15px; color:#fff;}
 
 /*切换城市*/

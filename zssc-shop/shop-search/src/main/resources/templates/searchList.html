@@ -13,6 +13,47 @@
     <script type="text/javascript" src="js/ssoUser.js"></script>
     <script type="text/javascript" src="js/ajaxUtils.js"></script>
     <script type="text/javascript" src="js/shopCar.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $("#search-but").click(function () {
+                // 1.获取用户搜索的关键字
+                var keyword = $("#keyword").val();
+                // 2.跳转到查询的界面
+                location.href = "http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword=" + keyword;
+
+            });
+
+            $("#my-order-but").click(function () {
+
+                // 1.获取token
+                var token = localStorage.getItem('login-user');
+
+                // 2.发送请求
+                if (token) {
+                    location.href = "http://localhost/shop-order/orderController/getOrderListByUserId?token=" + token;
+                }else{
+                    location.href = "http://localhost/shop-order/orderController/getOrderListByUserId";
+                }
+            });
+        })
+
+        function findCarList() {
+
+            // 1.获取token
+            var token = localStorage.getItem('login-user');
+
+            // 2.跳转到购物车列表
+            if (token) {
+                location.href = "http://localhost/shop-car/carController/getUserCarList?token=" + token;
+            } else {
+                location.href = "http://localhost/shop-car/carController/getUserCarList";
+            }
+        }
+
+    </script>
+
 </head>
 
 <body>
@@ -73,13 +114,7 @@
             <li><a href="#">我 (个人中心)</a></li>
             <li><a href="javascript:void(0)" onclick="findCarList()">我的购物车<span id="shoCarNum"
                                                                                 style="color: red"></span></a></li>
-            <li><a href="#">我的订单</a></li>
-            <li class="erweima">
-                <a href="#">扫描二维码</a>
-                <div class="ewm-tu">
-                    <a href="#"><img src="images/erweima-tu.jpg" /></a>
-                </div>
-            </li>
+            <li><a href="javascript:void(0)" id="my-order-but">我的订单</a></li>
             <div style="clear:both;"></div>
         </ul>
         <div style="clear:both;"></div>
@@ -89,7 +124,7 @@
 <!--logo search 开始-->
 <div class="hd-info1 w1200">
     <div class="logo f-l">
-        <h1><a href="#" title="中林网站"><img src="images/logo.jpg" /></a></h1>
+        <h1><a href="http://localhost/shop-home"><img src="images/logo.png" width="250" height="60" style="position:relative;top:30px;"/></a></h1>
     </div>
     <div class="dianji f-r">
         <div class="btn1">
@@ -107,879 +142,32 @@
         </ul>
         <div class="srh">
             <div class="ipt f-l">
-                <input type="text" placeholder="搜索商品..." ss-search-show="sp" />
-                <input type="text" placeholder="搜索店铺..." ss-search-show="dp" style="display:none;" />
+                <input type="text" id="keyword" placeholder="搜索商品..." ss-search-show="sp"/>
+                <input type="text" placeholder="搜索店铺..." ss-search-show="dp" style="display:none;"/>
             </div>
-            <button class="f-r">搜 索</button>
+            <button class="f-r" id="search-but">搜 索</button>
             <div style="clear:both;"></div>
         </div>
         <ul class="sp2">
-            <li><a href="#">绿豆</a></li>
-            <li><a href="#">大米</a></li>
-            <li><a href="#">驱蚊</a></li>
-            <li><a href="#">洗面奶</a></li>
-            <li><a href="#">格力空调</a></li>
-            <li><a href="#">洗发护发</a></li>
-            <li><a href="#">葡萄 </a></li>
-            <li><a href="#">脉动</a></li>
-            <li><a href="#">海鲜水产</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='小说'">小说</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='文学'">文学</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='社科'">社科</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='外语'">外语</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='教辅'">教辅</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='艺术'">艺术</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='童书'">童书 </a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='青春'">青春</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='文学'">文学</a></li>
             <div style="clear:both;"></div>
         </ul>
     </div>
 
     <div style="clear:both;"></div>
-</div>
-
-<!--nav 开始-->
-<div style="border-bottom:2px solid #F09E0B;">
-    <div class="nav w1200">
-        <a href="JavaScript:;" class="sp-kj" kj="">
-            商品分类快捷
-        </a>
-        <div class="kj-show2 none" kj-sh="">
-            <div class="kj-info1" mg="shiping">
-                <dl class="kj-dl1">
-                    <dt><a href="#">食品/饮料/酒水</a></dt>
-                    <dd>
-                        零食/糖果/巧克力、饼干/糕点、生鲜<br />
-                        酒水饮料/乳饮料、调味/速食<br />
-                        粮油/干货、冲调制品
-                    </dd>
-                </dl>
-                <div class="kj-if-show" mg2="shiping">
-                    <dl>
-                        <dt>零食/糖果/巧克力</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>零食/糖果/巧克力</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>零食/糖果/巧克力</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>零食/糖果/巧克力</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>零食/糖果/巧克力</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl style="border-bottom:none;">
-                        <dt>零食/糖果/巧克力</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                </div>
-            </div>
-            <div class="kj-info1" mg="muying">
-                <dl class="kj-dl1">
-                    <dt><a href="#">母婴用品/玩具</a></dt>
-                    <dd>
-                        奶粉/辅食、尿裤/湿巾、玩具<br />
-                        宝宝喂养/洗护清洁
-                    </dd>
-                </dl>
-                <div class="kj-if-show" mg2="muying">
-                    <dl>
-                        <dt>母婴用品/玩具</dt>
-                        <dd>
-                            <a href="#">巧克力</a>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">巧克力</a>
-                            <a href="#">巧克力</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>母婴用品/玩具</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">巧克力</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">口香糖</a>
-                            <a href="#">巧克力</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>母婴用品/玩具</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">巧克力</a>
-                            <a href="#">膨食品</a>
-                            <a href="#">糖克力/口香糖</a>
-                            <a href="#">肉品</a>
-                            <a href="#">巧克力</a>
-                            <a href="#">进口食品</a>
-                            <a href="#">巧克力</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>母婴用品/玩具</dt>
-                        <dd>
-                            <a href="#">巧克力</a>
-                            <a href="#">坚果线</a>
-                            <a href="#">巧克力</a>
-                            <a href="#">膨食品</a>
-                            <a href="#">果冻/克口香糖</a>
-                            <a href="#">巧克力</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">巧克力</a>
-                            <a href="#">进食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>母婴用品/玩具</dt>
-                        <dd>
-                            <a href="#">迷线</a>
-                            <a href="#">巧克力</a>
-                            <a href="#">膨化品</a>
-                            <a href="#">巧克力</a>
-                            <a href="#">糖果力/口香糖</a>
-                            <a href="#">巧克力</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl style="border-bottom:none;">
-                        <dt>母婴用品/玩具</dt>
-                        <dd>
-                            <a href="#">迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果克力/口香糖</a>
-                            <a href="#">肉类/熟品</a>
-                            <a href="#">进食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                </div>
-            </div>
-            <div class="kj-info1" mg="chuju">
-                <dl class="kj-dl1">
-                    <dt><a href="#">厨具餐具/家用清洁/纸品</a></dt>
-                    <dd>
-                        纸品湿巾、衣物清洁护理、家庭清洁<br />
-                        清洁、厨具、烹饪用具/厨房配件<br />
-                        食物保鲜容器
-                    </dd>
-                </dl>
-                <div class="kj-if-show" mg2="chuju">
-                    <dl>
-                        <dt>厨具餐具</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>厨具餐具</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>厨具餐具</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>厨具餐具</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-
-                        <dt>厨具餐具</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl style="border-bottom:none;">
-                        <dt>厨具餐具</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                </div>
-            </div>
-            <div class="kj-info1" mg="meizhuang">
-                <dl class="kj-dl1">
-                    <dt><a href="#">美妆洗护/个人护理洗发护发</a></dt>
-                    <dd>
-                        洗浴用品/身体护理、口腔护理、面部护肤<br />
-                        女性护理、彩妆/美容工具、男士护理
-                    </dd>
-                </dl>
-                <div class="kj-if-show" mg2="meizhuang">
-                    <dl>
-                        <dt>美妆洗护</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>美妆洗护</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>美妆洗护</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>美妆洗护</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>美妆洗护</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl style="border-bottom:none;">
-                        <dt>美妆洗护</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                </div>
-            </div>
-            <div class="kj-info1" style="border-bottom:none;" mg="jiafang">
-                <dl class="kj-dl1" style="padding:6px 10px;">
-                    <dt><a href="#">家居/家纺</a></dt>
-                    <dd>
-                        浴室用品、餐具水具<br />
-                        收纳/居家日用、针织纺品
-                    </dd>
-                </dl>
-                <div class="kj-if-show" mg2="jiafang">
-                    <dl>
-                        <dt>家居/家纺</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>家居/家纺</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>家居/家纺</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>家居/家纺</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>家居/家纺</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>家居/家纺</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>家居/家纺</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>家居/家纺</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>家居/家纺</dt>
-
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>家居/家纺</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl style="border-bottom:none;">
-                        <dt>家居/家纺</dt>
-                        <dd>
-                            <a href="#">坚果迷线</a>
-                            <a href="#">膨化食品</a>
-                            <a href="#">糖果果冻/巧克力/口香糖</a>
-                            <a href="#">肉类/熟食食品</a>
-                            <a href="#">进口食品</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                </div>
-            </div>
-        </div>
-        <ul>
-            <li><a href="#">在线商城</a></li>
-            <li><a href="#">餐饮娱乐</a></li>
-            <li><a href="#">家政服务</a></li>
-            <li><a href="#">美容美发</a></li>
-            <li><a href="#">教育培训</a></li>
-            <li><a href="#">汽车房产</a></li>
-            <li><a href="#">家居建材</a></li>
-            <li><a href="#">二手市场</a></li>
-            <div style="clear:both;"></div>
-        </ul>
-        <div style="clear:both;"></div>
-    </div>
 </div>
 
 <!--内容开始-->
 <!--筛选结果-->
-<div class="screening-results w1200">
-    <p class="tiao">找到共 233 条</p>
-    <div class="results">
-        <p class="re-p1 f-l">
-            全部结果：零食 > <span>品牌：三只松鼠　X　</span>　>
-        </p>
-        <div class="re-search f-l">
-            <input type="text" placeholder="三只松鼠" class="f-l" />
-            <button></button>
-            <div style="clear:both;"></div>
-        </div>
-        <p class="re-p2 f-r">
-            <a href="#">清空筛选条件</a>
-        </p>
-        <div style="clear:both;"></div>
-    </div>
-</div>
-<!--品牌-->
-<div class="hover-brand">
-    <p class="ho-pingpai f-l">品牌</p>
-    <ul class="f-l">
-        <li><a href="#"><img src="images/hover-br-li-tu1.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu2.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu3.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu4.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu5.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu6.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu7.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu8.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu9.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu10.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu11.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu12.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu13.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu14.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu15.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu16.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu17.gif" /></a></li>
-        <li><a href="#"><img src="images/hover-br-li-tu18.gif" /></a></li>
-        <div style="clear:both;"></div>
-    </ul>
-    <div class="duoxuan f-r">
-        <button ppgd="">多选</button>
-        <a href="JavaScript:;" ppgd="">更多 ∨</a>
-    </div>
-    <div style="clear:both;"></div>
-</div>
 
-<!--品牌 更多-->
-<div class="re-brand">
-    <div class="brand-top">
-        <div class="br-t">
-            <p class="pingpai f-l">品牌</p>
-            <div class="br-abc f-l">
-                <p class="moren f-l">默认</p>
-                <ul class="f-l">
-                    <li><a href="#">A</a></li>
-                    <li><a href="#">B</a></li>
-                    <li><a href="#">C</a></li>
-                    <li><a href="#">D</a></li>
-                    <li><a href="#">E</a></li>
-                    <li><a href="#">F</a></li>
-                    <li><a href="#">G</a></li>
-                    <li><a href="#">H</a></li>
-                    <li><a href="#">I</a></li>
-                    <li><a href="#">J</a></li>
-                    <li><a href="#">K</a></li>
-                    <li><a href="#">L</a></li>
-                    <li><a href="#">M</a></li>
-                    <li><a href="#">N</a></li>
-                    <li><a href="#">O</a></li>
-                    <li><a href="#">P</a></li>
-                    <li><a href="#">Q</a></li>
-                    <li><a href="#">R</a></li>
-                    <li><a href="#">S</a></li>
-                    <li><a href="#">T</a></li>
-                    <li><a href="#">U</a></li>
-                    <li><a href="#">V</a></li>
-                    <li><a href="#">W</a></li>
-                    <li><a href="#">X</a></li>
-                    <li><a href="#">Y</a></li>
-                    <li><a href="#">Z</a></li>
-                    <div style="clear:both;"></div>
-                </ul>
-                <a href="#" class="qita f-l">其他</a>
-                <div style="clear:both;"></div>
-            </div>
-            <div style="clear:both;"></div>
-        </div>
-        <div class="br-b">
-            <ul>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>小老板</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>乐事/Lay's </span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>周黑鸭/ZHOU...</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>喜之郎/STRONG</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>费列罗/FERRERO</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>好丽友/orion</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>莱家/Loacker </span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>稻香村/dao...</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>友臣/YOUCHEN</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>好想你</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>黄飞红/HUANG...</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>可康/COCON</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>张君雅</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>德芙/Dove</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>利奥/Oreo</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>士力架/SNICKERS</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>汉斯/Hunt's</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>多力多滋</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>百草味/Be ...</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>丽芝士/Richeese</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>百吉福/MILKANA</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>利葡/LiPO</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>友谊牌/Tipo</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>百草味/Be ...</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>丽芝士/Richeese</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>百吉福/MILKANA</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>利葡/LiPO</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>友谊牌/Tipo</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>百草味/Be ...</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>丽芝士/Richeese</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>百吉福/MILKANA</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>利葡/LiPO</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>友谊牌/Tipo</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>百草味/Be ...</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>丽芝士/Richeese</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>百吉福/MILKANA</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>利葡/LiPO</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>友谊牌/Tipo</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>百草味/Be ...</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>丽芝士/Richeese</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>百吉福/MILKANA</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>利葡/LiPO</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>友谊牌/Tipo</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>百草味/Be ...</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>丽芝士/Richeese</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>百吉福/MILKANA</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>利葡/LiPO</span>
-                </li>
-                <li>
-                    <input type="checkbox" name="hobby" ></input>
-                    <span>友谊牌/Tipo</span>
-                </li>
-                <div style="clear:both;"></div>
-            </ul>
-        </div>
-    </div>
-    <div class="brand-bt">
-        <button>确定</button>
-        <button class="quxiao" quxiao1="">取消</button>
-    </div>
-</div>
-
-<!--品牌热销-->
-<div class="brand-sales">
-    <dl>
-        <dt>本品牌热销</dt>
-        <dd>
-            <a href="#">坚果礼品</a>
-            <a href="#">碧根果</a>
-            <a href="#">松子</a>
-            <a href="#">夏威夷果</a>
-            <a href="#">核桃</a>
-            <a href="#">葡萄干</a>
-            <a href="#">花生</a>
-            <a href="#">豆类制品</a>
-            <a href="#">杏仁</a>
-            <a href="#">枣类</a>
-            <a href="#">瓜子</a>
-            <a href="#">其他坚果</a><a href="#">坚果礼品</a>
-            <a href="#">碧根果</a>
-            <a href="#">松子</a>
-            <a href="#">夏威夷果</a>
-            <a href="#">核桃</a>
-            <a href="#">葡萄干</a>
-            <a href="#">花生</a>
-            <a href="#">豆类制品</a>
-            <a href="#">杏仁</a>
-            <a href="#">枣类</a>
-            <a href="#">瓜子</a>
-            <a href="#">其他坚果</a>
-            <a href="#">坚果礼品</a>
-            <a href="#">碧根果</a>
-            <a href="#">松子</a>
-            <a href="#">夏威夷果</a>
-            <a href="#">核桃</a>
-            <a href="#">葡萄干</a>
-            <a href="#">花生</a>
-            <a href="#">豆类制品</a>
-            <a href="#">杏仁</a>
-            <a href="#">枣类</a>
-            <a href="#">瓜子</a>
-            <a href="#">其他坚果</a>
-            <a href="#">坚果礼品</a>
-            <a href="#">碧根果</a>
-            <a href="#">松子</a>
-            <a href="#">夏威夷果</a>
-            <a href="#">核桃</a>
-            <a href="#">葡萄干</a>
-            <a href="#">花生</a>
-            <a href="#">豆类制品</a>
-            <a href="#">杏仁</a>
-            <a href="#">枣类</a>
-            <a href="#">瓜子</a>
-            <a href="#">其他坚果</a>
-        </dd>
-        <div style="clear:both;"></div>
-    </dl>
-    <dl style="border-bottom:none;">
-        <dt>大家都在选</dt>
-        <dd>
-            <a href="#">坚果礼品</a>
-            <a href="#">碧根果</a>
-            <a href="#">松子</a>
-            <a href="#">夏威夷果</a>
-            <a href="#">核桃</a>
-            <a href="#">葡萄干</a>
-            <a href="#">花生</a>
-            <a href="#">豆类制品</a>
-            <a href="#">杏仁</a>
-            <a href="#">枣类</a>
-            <a href="#">瓜子</a>
-            <a href="#">其他坚果</a>
-        </dd>
-        <div style="clear:both;"></div>
-    </dl>
-</div>
 
 <!--内容↓↑-->
 <div class="shop-page-con w1200">
@@ -991,10 +179,10 @@
             <ul class="shop-left-ul">
                 <li>
                     <div class="li-top">
-                        <a href="#" class="li-top-tu"><img src="images/sp-con-r-tu.gif" /></a>
+                        <a href="#" class="li-top-tu"><img src="images/daodej.jpg" /></a>
                         <p class="jiage"><span class="sp1">￥109</span><span class="sp2">￥209</span></p>
                     </div>
-                    <p class="miaoshu">德国原装进口Wurenbacher瓦伦冰黑啤5L/桶</p>
+                    <p class="miaoshu">道德经 精装版</p>
                     <div class="li-md">
                         <div class="md-l f-l">
                             <p class="md-l-l f-l" ap="">1</p>
@@ -1011,14 +199,14 @@
                         <div style="clear:both;"></div>
                     </div>
                     <p class="pingjia">88888评价</p>
-                    <p class="weike">微克宅购自营</p>
+                    <p class="weike">哲思书城自营</p>
                 </li>
                 <li>
                     <div class="li-top">
-                        <a href="#" class="li-top-tu"><img src="images/sp-con-r-tu.gif" /></a>
+                        <a href="#" class="li-top-tu"><img src="images/zibenlun.jpg" /></a>
                         <p class="jiage"><span class="sp1">￥109</span><span class="sp2">￥209</span></p>
                     </div>
-                    <p class="miaoshu">德国原装进口Wurenbacher瓦伦冰黑啤5L/桶</p>
+                    <p class="miaoshu">资本论 精装</p>
                     <div class="li-md">
                         <div class="md-l f-l">
                             <p class="md-l-l f-l" ap="">1</p>
@@ -1035,14 +223,14 @@
                         <div style="clear:both;"></div>
                     </div>
                     <p class="pingjia">88888评价</p>
-                    <p class="weike">微克宅购自营</p>
+                    <p class="weike">哲思书城自营</p>
                 </li>
                 <li>
                     <div class="li-top">
-                        <a href="#" class="li-top-tu"><img src="images/sp-con-r-tu.gif" /></a>
+                        <a href="#" class="li-top-tu"><img src="images/daodej.jpg" /></a>
                         <p class="jiage"><span class="sp1">￥109</span><span class="sp2">￥209</span></p>
                     </div>
-                    <p class="miaoshu">德国原装进口Wurenbacher瓦伦冰黑啤5L/桶</p>
+                    <p class="miaoshu">道德经</p>
                     <div class="li-md">
                         <div class="md-l f-l">
                             <p class="md-l-l f-l" ap="">1</p>
@@ -1059,7 +247,7 @@
                         <div style="clear:both;"></div>
                     </div>
                     <p class="pingjia">88888评价</p>
-                    <p class="weike">微克宅购自营</p>
+                    <p class="weike">哲思书城自营</p>
                 </li>
             </ul>
         </div>
@@ -1069,7 +257,6 @@
             <ul class="shop-cmp-l f-l">
                 <li class="current"><a href="#">综合 ↓</a></li>
                 <li><a id="gprice-href" href="javascript:void(0)">价格 ↓</a></li>
-                <li><a id="gid-href" href="javascript:void(0)">商品ID↓</a></li>
                 <li><a href="#">评价 ↓</a></li>
                 <div style="clear:both;"></div>
             </ul>
@@ -1128,7 +315,7 @@
                         <div style="clear:both;"></div>
                     </div>
                     <p class="pingjia">88888评价</p>
-                    <p class="weike">微克宅购自营</p>
+                    <p class="weike">哲思书城自营</p>
                 </li>
                 <div style="clear:both;"></div>
             </ul>
@@ -1221,12 +408,12 @@
     <p>
         <a href="#">关于我们</a><span>|</span>
         <a href="#">友情链接</a><span>|</span>
-        <a href="#">宅客微购社区</a><span>|</span>
+        <a href="#">哲思书城社区</a><span>|</span>
         <a href="#">诚征英才</a><span>|</span>
         <a href="#">商家登录</a><span>|</span>
         <a href="#">供应商登录</a><span>|</span>
         <a href="#">热门搜索</a><span>|</span>
-        <a href="#">宅客微购新品</a><span>|</span>
+        <a href="#">哲思书城新品</a><span>|</span>
         <a href="#">开放平台</a>
     </p>
     <p>

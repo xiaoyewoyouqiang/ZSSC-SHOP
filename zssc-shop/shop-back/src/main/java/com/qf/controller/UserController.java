@@ -26,6 +26,7 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+
     @RequestMapping("/getUserPage")
     public String getUserPage(HttpServletRequest request, Model model){
 

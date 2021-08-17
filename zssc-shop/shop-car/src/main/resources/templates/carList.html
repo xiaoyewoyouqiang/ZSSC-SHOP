@@ -14,6 +14,46 @@
     <script type="text/javascript" src="js/ssoUser.js"></script>
     <script type="text/javascript" src="js/shopCar.js"></script>
     <script type="text/javascript">
+
+        $(function () {
+            $("#search-but").click(function () {
+                // 1.获取用户搜索的关键字
+                var keyword = $("#keyword").val();
+                // 2.跳转到查询的界面
+                location.href = "http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword=" + keyword;
+
+            });
+
+            $("#my-order-but").click(function () {
+
+                // 1.获取token
+                var token = localStorage.getItem('login-user');
+
+                // 2.发送请求
+                if (token) {
+                    location.href = "http://localhost/shop-order/orderController/getOrderListByUserId?token=" + token;
+                }else{
+                    location.href = "http://localhost/shop-order/orderController/getOrderListByUserId";
+                }
+            });
+        })
+
+        function findCarList() {
+
+            // 1.获取token
+            var token = localStorage.getItem('login-user');
+
+            // 2.跳转到购物车列表
+            if (token) {
+                location.href = "http://localhost/shop-car/carController/getUserCarList?token=" + token;
+            } else {
+                location.href = "http://localhost/shop-car/carController/getUserCarList";
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
         function addCarGoodsNum(gid){
 
             // 1.先获取商品的数量
@@ -80,13 +120,8 @@
             <li><a href="#">我 (个人中心)</a></li>
             <li><a href="javascript:void(0)" onclick="findCarList()">我的购物车<span id="shoCarNum"
                                                                                 style="color: red"></span></a></li>
-            <li><a href="#">我的订单</a></li>
-            <li class="erweima">
-                <a href="#">扫描二维码</a>
-                <div class="ewm-tu">
-                    <a href="#"><img src="images/erweima-tu.jpg" /></a>
-                </div>
-            </li>
+            <li><a href="javascript:void(0)" id="my-order-but">我的订单</a></li>
+
             <div style="clear:both;"></div>
         </ul>
         <div style="clear:both;"></div>
@@ -96,7 +131,7 @@
 <!--logo search 开始-->
 <div class="hd-info1 w1200">
     <div class="logo f-l">
-        <h1><a href="#" title="中林网站"><img src="images/logo.jpg" /></a></h1>
+        <h1><a href="http://localhost/shop-home"><img src="images/logo.png" width="250" height="60" style="position:relative;top:30px;"/></a></h1>
     </div>
     <div class="search f-r">
         <ul class="sp">
@@ -113,15 +148,15 @@
             <div style="clear:both;"></div>
         </div>
         <ul class="sp2">
-            <li><a href="#">绿豆</a></li>
-            <li><a href="#">大米</a></li>
-            <li><a href="#">驱蚊</a></li>
-            <li><a href="#">洗面奶</a></li>
-            <li><a href="#">格力空调</a></li>
-            <li><a href="#">洗发护发</a></li>
-            <li><a href="#">葡萄 </a></li>
-            <li><a href="#">脉动</a></li>
-            <li><a href="#">海鲜水产</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='小说'">小说</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='文学'">文学</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='社科'">社科</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='外语'">外语</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='教辅'">教辅</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='艺术'">艺术</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='童书'">童书 </a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='青春'">青春</a></li>
+            <li><a href="http://localhost/shop-search/searchGoodsController/searchGoodsList?keyword='文学'">文学</a></li>
             <div style="clear:both;"></div>
         </ul>
     </div>
@@ -131,7 +166,7 @@
 <!--切换城市-->
 <div class="switch-city w1200">
     <a href="#" class="dianji-qh">切换城市</a>
-    <span class="dqm">重庆市</span>
+    <span class="dqm">佛山市</span>
     <div class="select-city">
         <div class="sl-city-top">
             <p class="f-l">切换城市</p>

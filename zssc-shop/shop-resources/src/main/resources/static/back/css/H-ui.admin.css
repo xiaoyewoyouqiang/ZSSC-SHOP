@@ -29,7 +29,7 @@ h4{line-height:30px}
 	.Hui-logo-m{display:none;width:45px;margin-left:10px}
 	.Hui-subtitle{ font-size:12px; color:#eee; padding-top:15px}
 	.viewhome{ line-height:44px; padding-right:15px}
-	.viewhome a{ color:#FFF; padding-left:20px; background:url(../images/icon_link.png) no-repeat 0 center}
+	.viewhome a{ color:#FFF; padding-left:20px; }
 	
 	/*导航*/
 	#Hui-nav{ margin-left:200px; margin-right:260px; background-color:transparent}
@@ -135,7 +135,7 @@ h4{line-height:30px}
 .portfolio-area li .checkbox{position: absolute; top: 10px; right: 5px; cursor:pointer}
 .portfolio-area li.hover .portfoliobox{ height:auto;padding-bottom:10px;box-shadow:0 1px 3px rgba(68, 68, 68,0.3);-moz-box-shadow:0 1px 3px rgba(68, 68, 68,0.3);-webkit-box-shadow:0 1px 3px rgba(68, 68, 68,0.3)}
 .portfolio-area li .picbox{width: 150px; height: 150px;overflow: hidden;text-align: center;vertical-align:middle;display:table-cell; line-height:150px;}
-.portfolio-area li .picbox img{max-width:150px; max-height:150px;vertical-align:middle;_margin-top: expression_r(( 150 - this.height ) / 2);}
+.portfolio-area li .picbox img{max-width:150px; max-height:150px;vertical-align:middle;}
 .portfolio-area li .textbox{ display: none; margin-top: 5px;}
 .portfolio-area li.hover .textbox{ display: block;}
 .portfolio-area li label{ display:block; cursor:pointer}

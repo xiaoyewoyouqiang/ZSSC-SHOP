@@ -66,7 +66,7 @@ a:focus{outline:none; -moz-outline:none;}		/*解决  去除 a 链接点击后有
 /*切换城市*/
 .switch-city{ margin:0 auto 15px; position:relative;}
 .switch-city .dianji-qh{ font-size:14px; color:#131313; margin:0 10px 0 15px;}
-.switch-city span{ font-size:14px; color:#AB5100;}
+.switch-city span{ font-size:14px; color:#D11415;}
 .select-city{ width:1200px;background:#fff; padding-bottom:30px; position:absolute; left:0; top:33px; display:none; z-index:9;}
 .select-city .sl-city-top{ height:42px; background-color:#F2F2F2;}
 .select-city .sl-city-top p{ line-height:42px; font-size:14px; color:#000; margin-left:12px;}

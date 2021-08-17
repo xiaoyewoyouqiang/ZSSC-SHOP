@@ -18,7 +18,7 @@ $(function(){ // 页面加载完成后调用
             },
             success:function(data){
                 if(data.status == 'success'){
-                    $("#logMsg").html("您好，欢迎【"+data.data+"】来到宅客微购，<a href='javascript:localStorage.removeItem(\"login-user\");location.reload();'>注销</a>");
+                    $("#logMsg").html("您好，欢迎【"+data.data+"】来到哲思书城，<a href='javascript:localStorage.removeItem(\"login-user\");location.reload();'>注销</a>");
                 }else{
                     $("#logMsg").html("您还没有登录，请<a href='http://localhost/shop-sso/toLoginUserPage'>登录</a>，<a href='http://localhost/shop-sso/toRegisterUserPage'>免费注册</a>");
                 }

@@ -42,7 +42,7 @@
         </thead>
         <tbody>
             <tr class="text-c" th:each="goods:${page.records}">
-                <td><input class="user-id" type="checkbox" th:value="${goods.id}" name=""></td>
+                <td><input class="goods-id" type="checkbox" th:value="${goods.id}" name=""></td>
                 <td th:text="${goods.id}"/>
                 <td th:text="${goods.gname}"/>
                 <td th:text="${goods.gtype}"/>
@@ -52,13 +52,13 @@
                 <td th:text="${goods.gprice}"/>
                 <td class="td-manage">
                     <a title="编辑" href="javascript:;"
-                       th:onclick="|admin_edit('用户编辑','http://localhost/shop-back/userController/getUserById/${goods.id}','1','600','400')|"
+                       th:onclick="|admin_edit('用户编辑','http://localhost/shop-back/goodsController/getGoodsById/${goods.id}','1','600','400')|"
                        class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>
                     </a>
 
-                    <a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none">
-                            <i class="Hui-iconfont">&#xe6e2;</i>
-                    </a>
+<!--                    <a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none">-->
+<!--                            <i class="Hui-iconfont">&#xe6e2;</i>-->
+<!--                    </a>-->
                 </td>
             </tr>
         </tbody>
@@ -76,16 +76,112 @@
 <script type="text/javascript" src="js/formUtils.js"></script>
 
 <script type="text/javascript">
+    $(function () {
 
+        $("#batchDelUesrBut").click(function () {
+
+
+            // 1.定义一个数组
+            var goodsIdArray = new Array();
+
+            // 2.获取用户勾选的id
+            $(".goods-id:checked").each(function(){
+                // 获取当前遍历的元素
+                var id = $(this).val();
+                // 把id添加到数组中
+                goodsIdArray.push(id);
+            });
+
+            // 因数组不能直接传递，所以需要封装一下
+            console.info(goodsIdArray);
+            var param = new Object();
+            param.goodsIdList = goodsIdArray;
+
+            // 3.使用ajax发送请求
+            $.post("http://localhost/shop-back/goodsController/goodsBatchDel",param,function (data) {
+
+                // 响应用户
+                responseClinetFlush(data);
+            });
+
+        });
+
+        // 给搜索按钮绑定一个点击事件
+        $("#search-goods-but").click(function(){
+
+            // 1.先获取用户查询的数据
+            var goodsname = $("#goodsname").val();
+            var email = $("#email").val();
+            var phone = $("#phone").val();
+
+            //2 发送请求
+            location.href=url+"?goodsname="+goodsname+"&email="+email+"&phone="+phone;
+
+        });
+
+        $("#rest-goods-but").click(function(){
+            location.href=url;
+        });
+
+    })
+    /*
+        参数解释：
+        title	标题
+        url		请求的url
+        id		需要操作的数据id
+        w		弹出层宽度（缺省调默认值）
+        h		弹出层高度（缺省调默认值）
+    */
     /*管理员-增加*/
     function admin_add(title,url,w,h){
         layer_show(title,url,w,h);
     }
+    /*管理员-删除*/
+    function admin_del(obj,id){
+        layer.confirm('确认要删除吗？',function(index){
+            //此处请求后台程序，下方是成功后的前台处理……
 
+            $(obj).parents("tr").remove();
+            layer.msg('已删除!',{icon:1,time:1000});
+        });
+    }
     /*管理员-编辑*/
     function admin_edit(title,url,id,w,h){
         layer_show(title,url,w,h);
     }
+    /*管理员-停用*/
+    function admin_stop(obj,id){
+        layer.confirm('确认要停用吗？',function(index){
+            //此处请求后台程序，下方是成功后的前台处理……
+
+            $(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_start(this,id)" href="javascript:;" title="启用" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
+            $(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">已禁用</span>');
+            $(obj).remove();
+            layer.msg('已停用!',{icon: 5,time:1000});
+        });
+    }
+
+    /*管理员-启用*/
+    function admin_start(obj,id){
+        layer.confirm('确认要启用吗？',function(index){
+            //此处请求后台程序，下方是成功后的前台处理……
+
+
+            $(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_stop(this,id)" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
+            $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+            $(obj).remove();
+            layer.msg('已启用!', {icon: 6,time:1000});
+        });
+    }
+    // /*管理员-增加*/
+    // function admin_add(title,url,w,h){
+    //     layer_show(title,url,w,h);
+    // }
+    //
+    // /*管理员-编辑*/
+    // function admin_edit(title,url,id,w,h){
+    //     layer_show(title,url,w,h);
+    // }
 
 </script>
 </body>
